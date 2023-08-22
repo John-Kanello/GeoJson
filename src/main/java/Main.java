@@ -71,18 +71,26 @@ public class Main {
                 """;
 
         GeoJson geoJson = objectMapper.readValue(geoJsonString, GeoJson.class);
-        if(geoJson instanceof FeatureCollection featureCollection) {
-            System.out.println("Feature Collection");
-            List<Feature> features = featureCollection.getFeatures();
-            for(var feature : features) {
-                GeometryObject geometryObject = feature.getGeometry();
-                System.out.println(geometryObject.getClass());
-            }
-        } else if(geoJson instanceof Feature feature) {
-            System.out.println("Feature");
-        } else if(geoJson instanceof GeometryObject<?> geometryObject) {
-            System.out.println("Geometry Object");
-        }
+        System.out.println(geoJson);
+
+        String geometryCollectionString = """
+                {
+                   "type": "GeometryCollection",
+                   "geometries": [{
+                     "type": "Point",
+                     "coordinates": [100.0, 0.0]
+                   }, {
+                     "type": "LineString",
+                     "coordinates": [
+                       [101.0, 0.0],
+                       [102.0, 1.0]
+                     ]
+                   }]
+                 }
+                """;
+
+        GeoJson geometryCollection = objectMapper.readValue(geometryCollectionString, GeoJson.class);
+        System.out.println(geometryCollection);
     }
 }
 
