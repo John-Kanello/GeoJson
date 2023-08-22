@@ -6,11 +6,11 @@ import java.util.List;
 public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     public Polygon() {
-        this.type = "Polygon";
+        super("Polygon");
     }
 
     public Polygon(List<List<List<Float>>> coordinates) {
-        super(coordinates, "Polygon");
+        super("Polygon", coordinates);
     }
 
     @Override

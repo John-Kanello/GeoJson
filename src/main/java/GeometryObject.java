@@ -20,12 +20,21 @@ public abstract class GeometryObject<T> extends GeoJson {
     T coordinates;
 
     public GeometryObject(){
-
+        super("GeometryObject");
     }
 
-    public GeometryObject(T coordinates, String type) {
+    public GeometryObject(String type) {
+        super(type);
+    }
+
+    public GeometryObject(T coordinates) {
+        super("GeometryObject");
         this.coordinates = coordinates;
-        this.type = type;
+    }
+
+    public GeometryObject(String type, T coordinates) {
+        super(type);
+        this.coordinates = coordinates;
     }
 
     @Override

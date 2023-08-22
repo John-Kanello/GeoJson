@@ -6,12 +6,12 @@ public class GeometryCollection extends GeoJson{
     private List<GeometryObject> geometries;
 
     public GeometryCollection() {
-        this.type = "GeometryCollection";
+        super("GeometryCollection");
     }
 
     public GeometryCollection(List<GeometryObject> geometries) {
+        super("GeometryCollection");
         this.geometries = geometries;
-        this.type = "GeometryCollection";
     }
 
     public List<GeometryObject> getGeometries() {

@@ -7,6 +7,10 @@ import java.util.List;
 @JsonTypeName("LinearRing")
 public class LinearRing extends LineString {
 
+    public LinearRing() {
+       super("LinearRing");
+    }
+
     public LinearRing(List<List<Float>> coordinates) {
         super(coordinates);
         if(coordinates == null || coordinates.size() < 4 || coordinates.get(0) != coordinates.get(coordinates.size() - 1)) {

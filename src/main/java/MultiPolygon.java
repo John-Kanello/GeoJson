@@ -6,11 +6,11 @@ import java.util.List;
 public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>>{
 
     public MultiPolygon() {
-        this.type = "MultiPolygon";
+        super("MultiPolygon");
     }
 
     public MultiPolygon(List<List<List<List<Float>>>> coordinates) {
-        super(coordinates, "MultiPolygon");
+        super("MultiPolygon", coordinates);
     }
 
     @Override

@@ -8,6 +8,9 @@ public class Main {
 
     public static void main(String[] args) throws JsonProcessingException {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
         String jsonString = """
                 {
                   "type" : "Feature",
@@ -20,9 +23,6 @@ public class Main {
                   }
                 }
                 """;
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         GeoJson nextFeature = objectMapper.readValue(jsonString, GeoJson.class);
         System.out.println(nextFeature);

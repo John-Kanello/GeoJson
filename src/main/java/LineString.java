@@ -6,11 +6,15 @@ import java.util.List;
 public class LineString extends GeometryObject<List<List<Float>>> {
 
     public LineString() {
-        this.type = "LineString";
+        super("LineString");
+    }
+
+    public LineString(String type) {
+        super(type);
     }
 
     public LineString(List<List<Float>> coordinates) {
-        super(coordinates, "LineString");
+        super("LineString", coordinates);
     }
 
     @Override

@@ -6,11 +6,11 @@ import java.util.List;
 public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     public MultiPoint() {
-        this.type = "MultiPoint";
+        super("MultiPoint");
     }
 
     public MultiPoint(List<List<Float>> coordinates) {
-        super(coordinates, "MultiPoint");
+        super("MultiPoint", coordinates);
     }
 
     @Override

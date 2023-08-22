@@ -6,12 +6,12 @@ import java.util.List;
 public class Point extends GeometryObject<List<Float>> {
 
     public Point() {
-        this.type = "Point";
+        super("Point");
     }
 
     public Point(List<Float> coordinates) {
+        super("Point");
         this.setCoordinates(coordinates);
-        this.type = "Point";
     }
 
     @Override

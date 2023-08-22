@@ -6,11 +6,11 @@ import java.util.List;
 public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
 
     public MultiLineString() {
-        this.type = "MultiLineString";
+        super("MultiLineString");
     }
 
     public MultiLineString(List<List<List<Float>>> coordinates) {
-        super(coordinates, "MultiLineString");
+        super("MultiLineString", coordinates);
     }
 
     @Override

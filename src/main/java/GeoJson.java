@@ -20,4 +20,8 @@ public abstract class GeoJson implements Serializable {
 
     public GeoJson() {
     }
+
+    public GeoJson(String type) {
+        this.type = type;
+    }
 }
