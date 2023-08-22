@@ -14,13 +14,11 @@ public class Feature extends GeoJson {
         this.type = "Feature";
     }
 
-
-
     @Override
     public String toString() {
         return "Feature{" +
                 "geometry=" + geometry +
-                ", type=" + type +
+                ", type='" + type + '\'' +
                 '}';
     }
 

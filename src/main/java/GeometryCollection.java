@@ -13,10 +13,10 @@ public class GeometryCollection extends GeometryObject<List<GeometryObject>>{
 
     @Override
     public String toString() {
-        return "\"GeometryCollection[" +
-                "coordinates=" + getCoordinates() +
-                ", type=" + type +
-                "]";
+        return "GeometryCollection{" +
+                "coordinates=" + coordinates +
+                ", type='" + type + '\'' +
+                '}';
     }
 
     @Override

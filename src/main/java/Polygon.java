@@ -1,15 +1,23 @@
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-public class Polygon extends GeometryObject<LinearRing> {
+import java.util.List;
 
-    public Polygon(LinearRing coordinates) {
+@JsonTypeName("Polygon")
+public class Polygon extends GeometryObject<List<List<List<Float>>>> {
+
+    public Polygon() {
+        this.type = "Polygon";
+    }
+
+    public Polygon(List<List<List<Float>>> coordinates) {
         super(coordinates, "Polygon");
     }
 
     @Override
     public String toString() {
         return "Polygon{" +
-                "coordinates=" + getCoordinates() +
-                ", type=" + type +
+                "coordinates=" + coordinates +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

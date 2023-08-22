@@ -10,25 +10,13 @@ import java.util.List;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Feature.class, name = "Feature"),
+        @JsonSubTypes.Type(value = FeatureCollection.class, name = "FeatureCollection"),
+        @JsonSubTypes.Type(value = GeometryObject.class, name = "GeometryObject")
 })
 public abstract class GeoJson implements Serializable {
 
     String type;
-    private List<Float> bBox;
-    private String id;
-//    private Property properties;
-    private String title;
 
     public GeoJson() {
-    }
-
-    @Override
-    public String toString() {
-        return "GeoJson{" +
-                "type='" + type + '\'' +
-                ", bBox=" + bBox +
-                ", id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                '}';
     }
 }

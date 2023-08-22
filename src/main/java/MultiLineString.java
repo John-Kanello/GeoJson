@@ -1,24 +1,33 @@
-public class MultiLineString extends GeometryObject<LineString> {
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-    public MultiLineString(LineString coordinates) {
+import java.util.List;
+
+@JsonTypeName("MultiLineString")
+public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
+
+    public MultiLineString() {
+        this.type = "MultiLineString";
+    }
+
+    public MultiLineString(List<List<List<Float>>> coordinates) {
         super(coordinates, "MultiLineString");
     }
 
     @Override
     public String toString() {
         return "MultiLineString{" +
-                "coordinates=" + getCoordinates() +
-                ", type=" + type +
+                "coordinates=" + coordinates +
+                ", type='" + type + '\'' +
                 '}';
     }
 
     @Override
-    public LineString getCoordinates() {
+    public List<List<List<Float>>> getCoordinates() {
         return super.getCoordinates();
     }
 
     @Override
-    public void setCoordinates(LineString coordinates) {
+    public void setCoordinates(List<List<List<Float>>> coordinates) {
         super.setCoordinates(coordinates);
     }
 }

@@ -1,13 +1,16 @@
-public class Point extends GeometryObject<Position> {
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-    String type;
+import java.util.List;
 
-    public Point(Position coordinates, String type) {
-        this.setCoordinates(coordinates);
+@JsonTypeName("Point")
+public class Point extends GeometryObject<List<Float>> {
+
+    public Point() {
         this.type = "Point";
     }
 
-    public Point() {
+    public Point(List<Float> coordinates) {
+        this.setCoordinates(coordinates);
         this.type = "Point";
     }
 
@@ -20,12 +23,12 @@ public class Point extends GeometryObject<Position> {
     }
 
     @Override
-    public Position getCoordinates() {
+    public List<Float> getCoordinates() {
         return super.getCoordinates();
     }
 
     @Override
-    public void setCoordinates(Position coordinates) {
+    public void setCoordinates(List<Float> coordinates) {
         super.setCoordinates(coordinates);
     }
 }
