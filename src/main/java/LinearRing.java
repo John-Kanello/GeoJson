@@ -12,12 +12,11 @@ public class LinearRing extends LineString {
     }
 
     public LinearRing(List<List<Float>> coordinates) {
-        super(coordinates);
+        super("LinearRing");
+        this.coordinates = coordinates;
         if(coordinates == null || coordinates.size() < 4 || coordinates.get(0) != coordinates.get(coordinates.size() - 1)) {
             throw new InvalidLinearRingException("Linear Ring length must be larger than or equal to 4");
         }
-
-        setCoordinates(coordinates);
     }
 
     @Override

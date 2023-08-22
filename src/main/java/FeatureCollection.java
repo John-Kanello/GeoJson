@@ -8,12 +8,12 @@ public class FeatureCollection extends GeoJson {
     private List<Feature> features;
 
     public FeatureCollection() {
-        this.type = "FeatureCollection";
+        super("FeatureCollection");
     }
 
     public FeatureCollection(List<Feature> features) {
+        super("FeatureCollection");
         this.features = features;
-        this.type = "FeatureCollection";
     }
 
     public List<Feature> getFeatures() {

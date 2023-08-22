@@ -6,12 +6,12 @@ public class Feature extends GeoJson {
     private GeometryObject geometry;
 
     public Feature() {
-        this.type = "Feature";
+        super("Feature");
     }
 
     public Feature(GeometryObject geometry) {
+        super("Feature");
         this.geometry = geometry;
-        this.type = "Feature";
     }
 
     @Override
