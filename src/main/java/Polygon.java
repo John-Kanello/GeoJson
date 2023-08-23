@@ -11,6 +11,7 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     public Polygon(List<List<List<Float>>> coordinates) {
         super("Polygon", coordinates);
+
     }
 
     @Override

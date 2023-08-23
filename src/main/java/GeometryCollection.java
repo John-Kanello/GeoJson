@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeometryCollection extends GeoJson{
+public class GeometryCollection extends GeoJson {
 
     private List<GeometryObject> geometries;
 

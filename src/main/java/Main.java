@@ -2,7 +2,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 
 public class Main {
 
@@ -20,6 +23,12 @@ public class Main {
                       [100.1, 11.1],
                       [21.4, 55.6]
                     ]
+                  },
+                  "properties": {
+                    "prop0": "value0",
+                    "prop1": {
+                        "this": "that"
+                    }
                   }
                 }
                 """;
@@ -37,6 +46,12 @@ public class Main {
                                 "geometry": {
                                     "type": "Point",
                                     "coordinates": [102.0, 0.5]
+                                },
+                                "properties": {
+                                  "prop0": "value0",
+                                  "prop1": {
+                                    "this": "that"
+                                  }
                                 }
                             },
                              {
@@ -49,6 +64,12 @@ public class Main {
                                         [104.0, 0.0],
                                         [105.0, 1.0]
                                     ]
+                                },
+                                "properties": {
+                                  "prop0": "value0",
+                                  "prop1": {
+                                    "this": "that"
+                                  }
                                 }
                             },
                             {
@@ -64,6 +85,14 @@ public class Main {
                                             [100.0, 0.0]
                                         ]
                                     ]
+                                },
+                                "properties": {
+                                  "prop0": "value0",
+                                  "prop1": {
+                                    "prop2": {
+                                        "prop3": "value2"
+                                    }
+                                  }
                                 }
                             }
                         ]
@@ -91,7 +120,36 @@ public class Main {
 
         GeoJson geometryCollection = objectMapper.readValue(geometryCollectionString, GeoJson.class);
         System.out.println(geometryCollection);
+
+//        String propertiesGeoJson = """
+//                {
+//                    "prop0": "value0",
+//                    "prop1": {
+//                        "this": "that"
+//                    }
+//                }
+//                """;
+//
+//        Map<String, Object> map;
+//        map = objectMapper.readValue(propertiesGeoJson, Map.class);
+//        readJson(map);
     }
+
+    static void readJson(Map<String, Object> map) {
+        for(var entry : map.entrySet()) {
+            System.out.println(entry.getKey());
+            if(entry.getValue().getClass().getSimpleName().equals("LinkedHashMap")) {
+                LinkedHashMap linkedHashMap = (LinkedHashMap) entry.getValue();
+                readJson(linkedHashMap);
+            } else {
+                System.out.println(entry.getValue());
+            }
+        }
+    }
+
+
+
+
 }
 
 
