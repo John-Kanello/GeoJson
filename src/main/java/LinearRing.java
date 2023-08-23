@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidLinearRingException;
+import utils.impl.LinearRingManager;
 
 import java.util.List;
 
@@ -13,10 +14,12 @@ public class LinearRing extends LineString {
 
     public LinearRing(List<List<Float>> coordinates) {
         super("LinearRing");
-        this.coordinates = coordinates;
-        if(coordinates == null || coordinates.size() < 4 || coordinates.get(0) != coordinates.get(coordinates.size() - 1)) {
-            throw new InvalidLinearRingException("Linear Ring length must be larger than or equal to 4");
+        LinearRingManager linearRingManager = new LinearRingManager();
+        if(!linearRingManager.isValid(coordinates)) {
+
         }
+        this.coordinates = coordinates;
+
     }
 
     @Override

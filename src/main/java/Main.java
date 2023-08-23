@@ -1,10 +1,7 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -12,8 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws JsonProcessingException {
 
-        ObjectMapper objectMapper = new ObjectMapper()
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+//        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         String jsonString = """
                 {
@@ -140,7 +138,9 @@ public class Main {
                         [
                             [100.0, 0.0],
                             [101.0, 0.0],
-                            [101.0, 1.0]
+                            [101.0, 1.0],
+                            [100.0, 1.0],
+                            [100.0, 0.0]
                         ]
                     ]
                 }

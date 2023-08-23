@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidLinearRingException;
+import utils.Manager;
+import utils.impl.PolygonManager;
 
 import java.util.List;
 
@@ -12,9 +14,26 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     public Polygon(List<List<List<Float>>> coordinates) {
         super("Polygon", coordinates);
-        if(coordinates == null || coordinates.size() < 4 || coordinates.get(0) != coordinates.get(coordinates.size() - 1)) {
-            throw new InvalidLinearRingException("Linear Ring length must be larger than or equal to 4");
+        PolygonManager polygonManager = new PolygonManager();
+        if(!polygonManager.isValid(coordinates)) {
+            throw new InvalidLinearRingException();
         }
+
+    }
+
+    @Override
+    public List<List<List<Float>>> getCoordinates() {
+        return super.getCoordinates();
+    }
+
+    @Override
+    public void setCoordinates(List<List<List<Float>>> coordinates) {
+
+        PolygonManager polygonManager = new PolygonManager();
+        if(!polygonManager.isValid(coordinates)) {
+            throw new InvalidLinearRingException();
+        }
+        super.setCoordinates(coordinates);
     }
 
     @Override
