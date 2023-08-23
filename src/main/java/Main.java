@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -11,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) throws JsonProcessingException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        ObjectMapper objectMapper = new ObjectMapper()
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         String jsonString = """
                 {
@@ -29,7 +30,8 @@ public class Main {
                     "prop1": {
                         "this": "that"
                     }
-                  }
+                  },
+                  "title": "Test title"
                 }
                 """;
 
@@ -118,18 +120,35 @@ public class Main {
                  }
                 """;
 
+
         GeoJson geometryCollection = objectMapper.readValue(geometryCollectionString, GeoJson.class);
         System.out.println(geometryCollection);
 
-//        String propertiesGeoJson = """
-//                {
-//                    "prop0": "value0",
-//                    "prop1": {
-//                        "this": "that"
-//                    }
-//                }
-//                """;
-//
+        String propertiesGeoJson = """
+                {
+                    "prop0": "value0",
+                    "prop1": {
+                        "this": "that"
+                    }
+                }
+                """;
+
+        String polygonString = """
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [100.0, 0.0],
+                            [101.0, 0.0],
+                            [101.0, 1.0]
+                        ]
+                    ]
+                }
+                """;
+
+        GeoJson polygon = objectMapper.readValue(polygonString, GeoJson.class);
+        System.out.println(polygon);
+
 //        Map<String, Object> map;
 //        map = objectMapper.readValue(propertiesGeoJson, Map.class);
 //        readJson(map);
@@ -138,7 +157,7 @@ public class Main {
     static void readJson(Map<String, Object> map) {
         for(var entry : map.entrySet()) {
             System.out.println(entry.getKey());
-            if(entry.getValue().getClass().getSimpleName().equals("LinkedHashMap")) {
+            if(entry.getValue().getClass().equals(LinkedHashMap.class)) {
                 LinkedHashMap linkedHashMap = (LinkedHashMap) entry.getValue();
                 readJson(linkedHashMap);
             } else {
