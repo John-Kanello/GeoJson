@@ -1,6 +1,5 @@
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidLinearRingException;
-import utils.Manager;
 import utils.impl.PolygonManager;
 
 import java.util.List;

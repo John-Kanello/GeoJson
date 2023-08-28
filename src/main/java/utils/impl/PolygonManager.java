@@ -1,11 +1,11 @@
 package utils.impl;
 
 import exception.InvalidLinearRingException;
-import utils.Manager;
+import utils.GeometryManager;
 
 import java.util.List;
 
-public class PolygonManager implements Manager<List<List<List<Float>>>> {
+public class PolygonManager implements GeometryManager<List<List<List<Float>>>> {
 
     LinearRingManager linearRingManager = new LinearRingManager();
 

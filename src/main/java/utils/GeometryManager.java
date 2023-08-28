@@ -2,7 +2,7 @@ package utils;
 
 import java.util.List;
 
-public interface Manager<T> {
+public interface GeometryManager<T> {
 
     boolean isValid(T coordinates);
 }
