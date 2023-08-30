@@ -1,5 +1,9 @@
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import exception.InvalidBboxException;
 import exception.InvalidLinearRingException;
+import utils.impl.BboxManager;
 import utils.impl.PolygonManager;
 
 import java.util.List;
@@ -17,7 +21,6 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
         if(!polygonManager.isValid(coordinates)) {
             throw new InvalidLinearRingException();
         }
-
     }
 
     @Override
@@ -28,9 +31,10 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
     @Override
     public void setCoordinates(List<List<List<Float>>> coordinates) {
 
-        PolygonManager polygonManager = new PolygonManager();
-        if(!polygonManager.isValid(coordinates)) {
+        if(!new PolygonManager().isValid(coordinates)) {
             throw new InvalidLinearRingException();
+        } else if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
         }
         super.setCoordinates(coordinates);
     }
@@ -40,6 +44,7 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
         return "Polygon{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
+                ", bbox=" + bbox +
                 '}';
     }
 }

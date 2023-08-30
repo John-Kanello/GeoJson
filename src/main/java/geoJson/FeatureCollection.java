@@ -1,4 +1,8 @@
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import exception.InvalidBboxException;
+import utils.impl.BboxManager;
 
 import java.util.List;
 
@@ -22,6 +26,9 @@ public class FeatureCollection extends GeoJson {
 
     public void setFeatures(List<Feature> features) {
         this.features = features;
+        if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
+        }
     }
 
     @Override
@@ -29,6 +36,7 @@ public class FeatureCollection extends GeoJson {
         return "FeatureCollection{" +
                 "features=" + features +
                 ", type='" + type + '\'' +
+                ", bbox=" + bbox +
                 '}';
     }
 }

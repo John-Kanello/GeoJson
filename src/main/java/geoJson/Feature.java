@@ -1,6 +1,8 @@
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import exception.InvalidBboxException;
+import utils.impl.BboxManager;
 
 import java.util.Map;
 
@@ -9,7 +11,6 @@ public class Feature extends GeoJson {
 
     private GeometryObject geometry;
     private Map<String, Object> properties;
-
     private String title;
 
     public Feature() {
@@ -21,6 +22,8 @@ public class Feature extends GeoJson {
         this.geometry = geometry;
         this.properties = properties;
         this.title = title;
+
+        System.out.println(geometry);
     }
 
     public GeometryObject getGeometry() {
@@ -29,6 +32,9 @@ public class Feature extends GeoJson {
 
     public void setGeometry(GeometryObject geometry) {
         this.geometry = geometry;
+        if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
+        }
     }
 
     public Map<String, Object> getProperties() {
@@ -47,6 +53,7 @@ public class Feature extends GeoJson {
         this.title = title;
     }
 
+
     @Override
     public String toString() {
         return "Feature{" +
@@ -54,6 +61,7 @@ public class Feature extends GeoJson {
                 ", properties=" + properties +
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
+                ", bbox=" + bbox +
                 '}';
     }
 }

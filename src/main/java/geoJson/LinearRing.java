@@ -1,5 +1,8 @@
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidLinearRingException;
+import exception.InvalidBboxException;
+import utils.impl.BboxManager;
 import utils.impl.LinearRingManager;
 
 import java.util.List;
@@ -16,10 +19,22 @@ public class LinearRing extends LineString {
         super("LinearRing");
         LinearRingManager linearRingManager = new LinearRingManager();
         if(!linearRingManager.isValid(coordinates)) {
-
+            throw new RuntimeException();
         }
         this.coordinates = coordinates;
+    }
 
+    @Override
+    public List<List<Float>> getCoordinates() {
+        return super.getCoordinates();
+    }
+
+    @Override
+    public void setCoordinates(List<List<Float>> coordinates) {
+        super.setCoordinates(coordinates);
+        if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
+        }
     }
 
     @Override
@@ -27,6 +42,7 @@ public class LinearRing extends LineString {
         return "LinearRing{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
+                ", bbox=" + bbox +
                 '}';
     }
 }

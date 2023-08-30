@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package geoJson;
+
+import exception.InvalidBboxException;
+import utils.impl.BboxManager;
+
 import java.util.List;
 
 public class GeometryCollection extends GeoJson {
@@ -10,7 +14,7 @@ public class GeometryCollection extends GeoJson {
     }
 
     public GeometryCollection(List<GeometryObject> geometries) {
-        super("GeometryCollection");
+        super("geoJson.GeometryCollection");
         this.geometries = geometries;
     }
 
@@ -20,6 +24,9 @@ public class GeometryCollection extends GeoJson {
 
     public void setGeometries(List<GeometryObject> geometries) {
         this.geometries = geometries;
+        if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
+        }
     }
 
     @Override
@@ -27,6 +34,7 @@ public class GeometryCollection extends GeoJson {
         return "GeometryCollection{" +
                 "geometries=" + geometries +
                 ", type='" + type + '\'' +
+                ", bbox=" + bbox +
                 '}';
     }
 }

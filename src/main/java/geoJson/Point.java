@@ -1,4 +1,8 @@
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import exception.InvalidBboxException;
+import utils.impl.BboxManager;
 
 import java.util.List;
 
@@ -15,14 +19,6 @@ public class Point extends GeometryObject<List<Float>> {
     }
 
     @Override
-    public String toString() {
-        return "Point{" +
-                "coordinates=" + coordinates +
-                ", type='" + type + '\'' +
-                '}';
-    }
-
-    @Override
     public List<Float> getCoordinates() {
         return super.getCoordinates();
     }
@@ -30,5 +26,17 @@ public class Point extends GeometryObject<List<Float>> {
     @Override
     public void setCoordinates(List<Float> coordinates) {
         super.setCoordinates(coordinates);
+        if(!new BboxManager().isValid(this)) {
+            throw new InvalidBboxException();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "coordinates=" + coordinates +
+                ", type='" + type + '\'' +
+                ", bbox=" + bbox +
+                '}';
     }
 }

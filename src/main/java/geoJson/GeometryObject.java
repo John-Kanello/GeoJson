@@ -1,3 +1,5 @@
+package geoJson;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -37,19 +39,20 @@ public abstract class GeometryObject<T> extends GeoJson {
         this.coordinates = coordinates;
     }
 
-    @Override
-    public String toString() {
-        return "GeometryObject{" +
-                "coordinates=" + coordinates +
-                ", type='" + type + '\'' +
-                '}';
-    }
-
     public T getCoordinates() {
         return coordinates;
     }
 
     public void setCoordinates(T coordinates) {
         this.coordinates = coordinates;
+    }
+
+    @Override
+    public String toString() {
+        return "GeometryObject{" +
+                "coordinates=" + coordinates +
+                ", type='" + type + '\'' +
+                ", bbox=" + bbox +
+                '}';
     }
 }

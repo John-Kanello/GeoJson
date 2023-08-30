@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import geoJson.GeoJson;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,12 +12,12 @@ public class Main {
     public static void main(String[] args) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-
 //        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         String jsonString = """
                 {
                   "type" : "Feature",
+                  "bbox": [-10.0, -10.0, 10.0, 10.0],
                   "geometry": {
                     "type": "LineString",
                     "coordinates": [
@@ -54,7 +56,7 @@ public class Main {
                                   }
                                 }
                             },
-                             {
+                            {
                                 "type": "Feature",
                                 "geometry": {
                                     "type": "LineString",
@@ -118,18 +120,8 @@ public class Main {
                  }
                 """;
 
-
         GeoJson geometryCollection = objectMapper.readValue(geometryCollectionString, GeoJson.class);
         System.out.println(geometryCollection);
-
-        String propertiesGeoJson = """
-                {
-                    "prop0": "value0",
-                    "prop1": {
-                        "this": "that"
-                    }
-                }
-                """;
 
         String polygonString = """
                 {
@@ -139,7 +131,6 @@ public class Main {
                             [100.0, 0.0],
                             [101.0, 0.0],
                             [101.0, 1.0],
-                            [100.0, 1.0],
                             [100.0, 0.0]
                         ]
                     ]
@@ -148,6 +139,77 @@ public class Main {
 
         GeoJson polygon = objectMapper.readValue(polygonString, GeoJson.class);
         System.out.println(polygon);
+
+        String test = """
+                 {
+                         "type": "MultiPolygon",
+                         "coordinates": [
+                             [
+                                 [
+                                     [102.0, 2.0],
+                                     [103.0, 2.0],
+                                     [103.0, 3.0],
+                                     [102.0, 2.0]
+                                 ]
+                             ],
+                             [
+                                 [
+                                     [100.0, 0.0],
+                                     [101.0, 0.0],
+                                     [101.0, 1.0],
+                                     [100.0, 1.0],
+                                     [100.0, 0.0]
+                                 ],
+                                 [
+                                     [100.2, 0.2],
+                                     [100.2, 0.8],
+                                     [100.8, 0.8],
+                                     [100.8, 0.2],
+                                     [100.2, 0.2]
+                                 ]
+                             ]
+                         ]
+                     }
+                """;
+
+        GeoJson multiPolygon = objectMapper.readValue(test, GeoJson.class);
+        System.out.println(multiPolygon);
+
+        String collection = """
+                {
+                         "type": "GeometryCollection",
+                         "geometries": [{
+                             "type": "Point",
+                             "coordinates": [100.0, 0.0]
+                         }, {
+                             "type": "LineString",
+                             "coordinates": [
+                                 [101.0, 0.0],
+                                 [102.0, 1.0]
+                             ]
+                         }]
+                     }
+                """;
+
+        GeoJson geometry = objectMapper.readValue(collection, GeoJson.class);
+        System.out.println(geometry);
+
+        String linearRingJson = """
+                {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [100.0, 0.0],
+                            [101.0, 0.0],
+                            [101.0, 1.0],
+                            [100.0, 0.0]
+                        ]
+                    ]
+                }
+                """;
+
+        GeoJson linearRing = objectMapper.readValue(linearRingJson, GeoJson.class);
+        System.out.println(linearRing);
 
 //        Map<String, Object> map;
 //        map = objectMapper.readValue(propertiesGeoJson, Map.class);
@@ -165,10 +227,6 @@ public class Main {
             }
         }
     }
-
-
-
-
 }
 
 
