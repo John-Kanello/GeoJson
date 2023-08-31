@@ -2,6 +2,7 @@ package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidBboxException;
+import exception.InvalidCoordinatesException;
 import utils.impl.BboxManager;
 
 import java.util.List;
@@ -25,10 +26,13 @@ public class FeatureCollection extends GeoJson {
     }
 
     public void setFeatures(List<Feature> features) {
-        this.features = features;
-        if(!new BboxManager().isValid(this)) {
+        if(features == null || features.isEmpty()) {
+            throw new InvalidCoordinatesException();
+        } else if(!new BboxManager().isValid(this)) {
             throw new InvalidBboxException();
         }
+
+        this.features = features;
     }
 
     @Override

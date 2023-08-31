@@ -2,6 +2,7 @@ package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidBboxException;
+import exception.InvalidCoordinatesException;
 import utils.impl.BboxManager;
 
 import java.util.Map;
@@ -17,20 +18,12 @@ public class Feature extends GeoJson {
         super("Feature");
     }
 
-    public Feature(GeometryObject geometry, Map<String, Object> properties, String title) {
-        super("Feature");
-        this.geometry = geometry;
-        this.properties = properties;
-        this.title = title;
-
-        System.out.println(geometry);
-    }
-
     public GeometryObject getGeometry() {
         return geometry;
     }
 
     public void setGeometry(GeometryObject geometry) {
+
         this.geometry = geometry;
         if(!new BboxManager().isValid(this)) {
             throw new InvalidBboxException();

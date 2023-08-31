@@ -7,13 +7,16 @@ import java.util.List;
 
 public class PolygonManager implements GeometryManager<List<List<List<Float>>>> {
 
-    LinearRingManager linearRingManager = new LinearRingManager();
-
     @Override
     public boolean isValid(List<List<List<Float>>> coordinates) {
+
+        if(coordinates == null || coordinates.isEmpty()) {
+            return false;
+        }
+
         for(var linearRing : coordinates) {
-            if(!linearRingManager.isValid(linearRing)) {
-                throw new InvalidLinearRingException();
+            if(linearRing.size() < 4 || !linearRing.get(0).equals(linearRing.get(linearRing.size() - 1))) {
+                return false;
             }
         }
 

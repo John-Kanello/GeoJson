@@ -1,6 +1,7 @@
 package geoJson;
 
 import exception.InvalidBboxException;
+import exception.InvalidCoordinatesException;
 import utils.impl.BboxManager;
 
 import java.util.List;
@@ -23,10 +24,10 @@ public class GeometryCollection extends GeoJson {
     }
 
     public void setGeometries(List<GeometryObject> geometries) {
-        this.geometries = geometries;
         if(!new BboxManager().isValid(this)) {
             throw new InvalidBboxException();
         }
+        this.geometries = geometries;
     }
 
     @Override

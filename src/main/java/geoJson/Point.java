@@ -2,6 +2,7 @@ package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import exception.InvalidBboxException;
+import exception.InvalidCoordinatesException;
 import utils.impl.BboxManager;
 
 import java.util.List;
@@ -25,10 +26,13 @@ public class Point extends GeometryObject<List<Float>> {
 
     @Override
     public void setCoordinates(List<Float> coordinates) {
-        super.setCoordinates(coordinates);
-        if(!new BboxManager().isValid(this)) {
+        if(coordinates == null || coordinates.isEmpty()) {
+            throw new InvalidCoordinatesException();
+        } else if(!new BboxManager().isValid(this)) {
             throw new InvalidBboxException();
         }
+
+        super.setCoordinates(coordinates);
     }
 
     @Override

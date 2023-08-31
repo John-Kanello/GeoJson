@@ -12,16 +12,20 @@ public class BboxManager implements GeometryManager<GeoJson> {
 
     @Override
     public boolean isValid(GeoJson geoJson) {
+
+        if(geoJson == null) {
+            return false;
+        }
         
         if(geoJson.getBbox() == null) {
             return true;
         }
 
         int bBoxSize = geoJson.getBbox().size();
-        int depth;
+        int dimensions;
         if(geoJson instanceof FeatureCollection featureCollection) {
-            depth = getDimensions(featureCollection.getFeatures());
-            if(bBoxSize != 2 * depth) {
+            dimensions = getDimensions(featureCollection.getFeatures());
+            if(bBoxSize != 2 * dimensions) {
                 return false;
             }
 
@@ -31,13 +35,13 @@ public class BboxManager implements GeometryManager<GeoJson> {
                 }
             }
         } else if(geoJson instanceof Feature feature) {
-            depth = getDimensions((List) feature.getGeometry().getCoordinates());
+            dimensions = getDimensions((List) feature.getGeometry().getCoordinates());
 
-            return bBoxSize == 2 * depth && isValid(feature.getGeometry());
+            return bBoxSize == 2 * dimensions && isValid(feature.getGeometry());
         } else if (geoJson instanceof GeometryObject geometryObject) {
-            depth = getDimensions((List) geometryObject.getCoordinates());
+            dimensions = getDimensions((List) geometryObject.getCoordinates());
 
-            return bBoxSize == 2 * depth;
+            return bBoxSize == 2 * dimensions;
         }
 
         return true;
