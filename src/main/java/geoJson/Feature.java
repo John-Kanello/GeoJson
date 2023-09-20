@@ -1,31 +1,34 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import utils.impl.BboxManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.util.BboxValidator;
 
 import java.util.Map;
 
-@JsonTypeName("Feature")
+@JsonTypeName("geoJson.Feature")
 public class Feature extends GeoJson {
 
-    private GeometryObject geometry;
+    private GeometryObject<?> geometry;
     private Map<String, Object> properties;
     private String title;
 
     public Feature() {
-        super("Feature");
+        super("geoJson.Feature");
     }
 
-    public GeometryObject getGeometry() {
+    public GeometryObject<?> getGeometry() {
         return geometry;
     }
 
-    public void setGeometry(GeometryObject geometry) {
+    public void setGeometry(GeometryObject<?> geometry) {
+
+        if (geometry == null) {
+            throw new IllegalArgumentException("Geometry cannot be null");
+        }
 
         this.geometry = geometry;
-        if(!new BboxManager().isValid(this)) {
+        if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
     }
@@ -49,7 +52,7 @@ public class Feature extends GeoJson {
 
     @Override
     public String toString() {
-        return "Feature{" +
+        return "geoJson.Feature{" +
                 "geometry=" + geometry +
                 ", properties=" + properties +
                 ", title='" + title + '\'' +

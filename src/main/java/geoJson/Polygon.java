@@ -1,25 +1,24 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import exception.InvalidLinearRingException;
-import utils.impl.BboxManager;
-import utils.impl.PolygonManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.exceptions.InvalidLinearRingException;
+import geoJson.util.BboxValidator;
+import geoJson.util.PolygonValidator;
 
 import java.util.List;
 
-@JsonTypeName("Polygon")
+@JsonTypeName("geoJson.Polygon")
 public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     public Polygon() {
-        super("Polygon");
+        super("geoJson.Polygon");
     }
 
     public Polygon(List<List<List<Float>>> coordinates) {
-        super("Polygon", coordinates);
-        PolygonManager polygonManager = new PolygonManager();
-        if(!polygonManager.isValid(coordinates)) {
+        super("geoJson.Polygon", coordinates);
+        if (!PolygonValidator.isValid(this)) {
             throw new InvalidLinearRingException();
         }
     }
@@ -31,12 +30,13 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     @Override
     public void setCoordinates(List<List<List<Float>>> coordinates) {
-
-        if(coordinates == null || coordinates.isEmpty()) {
+        if (coordinates == null || coordinates.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new PolygonManager().isValid(coordinates)) {
+        }
+        if(PolygonValidator.isValid(this)) {
             throw new InvalidLinearRingException();
-        } else if(!new BboxManager().isValid(this)) {
+        }
+        if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
         super.setCoordinates(coordinates);
@@ -44,7 +44,7 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     @Override
     public String toString() {
-        return "Polygon{" +
+        return "geoJson.Polygon{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

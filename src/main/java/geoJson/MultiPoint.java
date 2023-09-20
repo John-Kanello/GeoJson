@@ -1,21 +1,21 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import utils.impl.BboxManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("MultiPoint")
+@JsonTypeName("geoJson.MultiPoint")
 public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     public MultiPoint() {
-        super("MultiPoint");
+        super("geoJson.MultiPoint");
     }
 
     public MultiPoint(List<List<Float>> coordinates) {
-        super("MultiPoint", coordinates);
+        super("geoJson.MultiPoint", coordinates);
     }
 
     @Override
@@ -25,9 +25,9 @@ public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     @Override
     public void setCoordinates(List<List<Float>> coordinates) {
-        if(coordinates == null || coordinates.isEmpty()) {
+        if (coordinates == null || coordinates.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new BboxManager().isValid(this)) {
+        } else if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
 
@@ -36,7 +36,7 @@ public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     @Override
     public String toString() {
-        return "MultiPoint{" +
+        return "geoJson.MultiPoint{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

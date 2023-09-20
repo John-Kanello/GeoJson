@@ -1,9 +1,7 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import geoJson.Feature;
-import geoJson.GeoJson;
-import geoJson.GeometryObject;
-import geoJson.LineString;
+import geoJson.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

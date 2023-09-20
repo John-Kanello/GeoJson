@@ -17,7 +17,7 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = GeometryObject.class, name = "GeometryObject"),
         @JsonSubTypes.Type(value = GeometryCollection.class, name = "GeometryCollection")
 })
-public abstract class GeoJson implements Serializable {
+public abstract class GeoJson implements Serializable { //TODO: Convert to interface
 
     String type;
     List<Float> bbox;

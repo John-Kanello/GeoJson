@@ -1,23 +1,23 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import exception.InvalidLinearRingException;
-import utils.impl.BboxManager;
-import utils.impl.PolygonManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.exceptions.InvalidLinearRingException;
+import geoJson.util.BboxValidator;
+import geoJson.util.PolygonValidator;
 
 import java.util.List;
 
-@JsonTypeName("MultiPolygon")
-public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>>{
+@JsonTypeName("geoJson.MultiPolygon")
+public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>> {
 
     public MultiPolygon() {
-        super("MultiPolygon");
+        super("geoJson.MultiPolygon");
     }
 
     public MultiPolygon(List<List<List<List<Float>>>> coordinates) {
-        super("MultiPolygon", coordinates);
+        super("geoJson.MultiPolygon", coordinates);
     }
 
     @Override
@@ -28,15 +28,19 @@ public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>>{
     @Override
     public void setCoordinates(List<List<List<List<Float>>>> coordinates) {
 
-        if(coordinates == null || coordinates.isEmpty()) {
+        if (coordinates == null || coordinates.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new BboxManager().isValid(this)) {
+        } else if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
-
-        for(var polygon : coordinates) {
-            if(!new PolygonManager().isValid(polygon)) {
+        for (var polygon : coordinates) {
+            Polygon p = new Polygon(polygon);
+            if (PolygonValidator.isValid(p)) {
                 throw new InvalidLinearRingException();
+            }
+
+            if(BboxValidator.isValid(p)) {
+                throw new InvalidBboxException();
             }
         }
 
@@ -45,7 +49,7 @@ public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>>{
 
     @Override
     public String toString() {
-        return "MultiPolygon{" +
+        return "geoJson.MultiPolygon{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

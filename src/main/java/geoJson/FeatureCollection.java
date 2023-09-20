@@ -1,23 +1,23 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import utils.impl.BboxManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("FeatureCollection")
+@JsonTypeName("geoJson.FeatureCollection")
 public class FeatureCollection extends GeoJson {
 
     private List<Feature> features;
 
     public FeatureCollection() {
-        super("FeatureCollection");
+        super("geoJson.FeatureCollection");
     }
 
     public FeatureCollection(List<Feature> features) {
-        super("FeatureCollection");
+        super("geoJson.FeatureCollection");
         this.features = features;
     }
 
@@ -26,9 +26,9 @@ public class FeatureCollection extends GeoJson {
     }
 
     public void setFeatures(List<Feature> features) {
-        if(features == null || features.isEmpty()) {
+        if (features == null || features.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new BboxManager().isValid(this)) {
+        } else if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
 
@@ -37,7 +37,7 @@ public class FeatureCollection extends GeoJson {
 
     @Override
     public String toString() {
-        return "FeatureCollection{" +
+        return "geoJson.FeatureCollection{" +
                 "features=" + features +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

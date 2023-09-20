@@ -1,21 +1,21 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import utils.impl.BboxManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("MultiLineString")
+@JsonTypeName("geoJson.MultiLineString")
 public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
 
     public MultiLineString() {
-        super("MultiLineString");
+        super("geoJson.MultiLineString");
     }
 
     public MultiLineString(List<List<List<Float>>> coordinates) {
-        super("MultiLineString", coordinates);
+        super("geoJson.MultiLineString", coordinates);
     }
 
     @Override
@@ -25,17 +25,18 @@ public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
 
     @Override
     public void setCoordinates(List<List<List<Float>>> coordinates) {
-        if(coordinates == null || coordinates.isEmpty()) {
+        if (coordinates == null || coordinates.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new BboxManager().isValid(this)) {
+        } else if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
+
         super.setCoordinates(coordinates);
     }
 
     @Override
     public String toString() {
-        return "MultiLineString{" +
+        return "geoJson.MultiLineString{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

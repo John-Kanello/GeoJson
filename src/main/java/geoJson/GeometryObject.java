@@ -16,13 +16,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
         @JsonSubTypes.Type(value = Point.class, name = "Point"),
         @JsonSubTypes.Type(value = Polygon.class, name = "Polygon")
 })
-@JsonTypeName("GeometryObject")
+@JsonTypeName("geoJson.GeometryObject")
 public abstract class GeometryObject<T> extends GeoJson {
 
     T coordinates;
 
-    public GeometryObject(){
-        super("GeometryObject");
+    public GeometryObject() {
+        super("geoJson.GeometryObject");
     }
 
     public GeometryObject(String type) {
@@ -30,7 +30,7 @@ public abstract class GeometryObject<T> extends GeoJson {
     }
 
     public GeometryObject(T coordinates) {
-        super("GeometryObject");
+        super("geoJson.GeometryObject");
         this.coordinates = coordinates;
     }
 
@@ -49,7 +49,7 @@ public abstract class GeometryObject<T> extends GeoJson {
 
     @Override
     public String toString() {
-        return "GeometryObject{" +
+        return "geoJson.GeometryObject{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +
