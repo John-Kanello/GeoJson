@@ -1,17 +1,17 @@
 package geoJson;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import exception.InvalidBboxException;
-import exception.InvalidCoordinatesException;
-import utils.impl.BboxManager;
+import geoJson.exceptions.InvalidBboxException;
+import geoJson.exceptions.InvalidCoordinatesException;
+import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("LineString")
+@JsonTypeName("geoJson.LineString")
 public class LineString extends GeometryObject<List<List<Float>>> {
 
     public LineString() {
-        super("LineString");
+        super("geoJson.LineString");
     }
 
     public LineString(String type) {
@@ -19,7 +19,7 @@ public class LineString extends GeometryObject<List<List<Float>>> {
     }
 
     public LineString(List<List<Float>> coordinates) {
-        super("LineString", coordinates);
+        super("geoJson.LineString", coordinates);
     }
 
     @Override
@@ -29,17 +29,18 @@ public class LineString extends GeometryObject<List<List<Float>>> {
 
     @Override
     public void setCoordinates(List<List<Float>> coordinates) {
-        if(coordinates == null || coordinates.isEmpty()) {
+        if (coordinates == null || coordinates.isEmpty()) {
             throw new InvalidCoordinatesException();
-        } else if(!new BboxManager().isValid(this)) {
+        } else if (!BboxValidator.isValid(this)) {
             throw new InvalidBboxException();
         }
+
         super.setCoordinates(coordinates);
     }
 
     @Override
     public String toString() {
-        return "LineString{" +
+        return "geoJson.LineString{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +
