@@ -9,15 +9,15 @@ import geoJson.util.PolygonValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.MultiPolygon")
+@JsonTypeName("MultiPolygon")
 public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>> {
 
     public MultiPolygon() {
-        super("geoJson.MultiPolygon");
+        super("MultiPolygon");
     }
 
     public MultiPolygon(List<List<List<List<Float>>>> coordinates) {
-        super("geoJson.MultiPolygon", coordinates);
+        super("MultiPolygon", coordinates);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class MultiPolygon extends GeometryObject<List<List<List<List<Float>>>>> 
 
     @Override
     public String toString() {
-        return "geoJson.MultiPolygon{" +
+        return "MultiPolygon{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

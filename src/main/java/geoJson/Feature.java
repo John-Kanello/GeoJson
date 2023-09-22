@@ -6,7 +6,7 @@ import geoJson.util.BboxValidator;
 
 import java.util.Map;
 
-@JsonTypeName("geoJson.Feature")
+@JsonTypeName("Feature")
 public class Feature extends GeoJson {
 
     private GeometryObject<?> geometry;
@@ -14,7 +14,7 @@ public class Feature extends GeoJson {
     private String title;
 
     public Feature() {
-        super("geoJson.Feature");
+        super("Feature");
     }
 
     public GeometryObject<?> getGeometry() {
@@ -52,7 +52,7 @@ public class Feature extends GeoJson {
 
     @Override
     public String toString() {
-        return "geoJson.Feature{" +
+        return "Feature{" +
                 "geometry=" + geometry +
                 ", properties=" + properties +
                 ", title='" + title + '\'' +

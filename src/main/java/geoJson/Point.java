@@ -7,15 +7,15 @@ import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.Point")
+@JsonTypeName("Point")
 public class Point extends GeometryObject<List<Float>> {
 
     public Point() {
-        super("geoJson.Point");
+        super("Point");
     }
 
     public Point(List<Float> coordinates) {
-        super("geoJson.Point");
+        super("Point");
         this.setCoordinates(coordinates);
     }
 
@@ -37,7 +37,7 @@ public class Point extends GeometryObject<List<Float>> {
 
     @Override
     public String toString() {
-        return "geoJson.Point{" +
+        return "Point{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

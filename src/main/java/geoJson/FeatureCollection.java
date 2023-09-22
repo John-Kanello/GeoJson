@@ -7,17 +7,17 @@ import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.FeatureCollection")
+@JsonTypeName("FeatureCollection")
 public class FeatureCollection extends GeoJson {
 
     private List<Feature> features;
 
     public FeatureCollection() {
-        super("geoJson.FeatureCollection");
+        super("FeatureCollection");
     }
 
     public FeatureCollection(List<Feature> features) {
-        super("geoJson.FeatureCollection");
+        super("FeatureCollection");
         this.features = features;
     }
 
@@ -37,7 +37,7 @@ public class FeatureCollection extends GeoJson {
 
     @Override
     public String toString() {
-        return "geoJson.FeatureCollection{" +
+        return "FeatureCollection{" +
                 "features=" + features +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

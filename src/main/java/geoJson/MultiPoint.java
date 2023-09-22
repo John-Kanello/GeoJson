@@ -7,15 +7,15 @@ import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.MultiPoint")
+@JsonTypeName("MultiPoint")
 public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     public MultiPoint() {
-        super("geoJson.MultiPoint");
+        super("MultiPoint");
     }
 
     public MultiPoint(List<List<Float>> coordinates) {
-        super("geoJson.MultiPoint", coordinates);
+        super("MultiPoint", coordinates);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MultiPoint extends GeometryObject<List<List<Float>>> {
 
     @Override
     public String toString() {
-        return "geoJson.MultiPoint{" +
+        return "MultiPoint{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

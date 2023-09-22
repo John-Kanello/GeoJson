@@ -10,14 +10,13 @@ import java.util.List;
 public class GeometryCollection extends GeoJson {
 
     private List<GeometryObject<?>> geometries;
-    private JsonSerializer serializer;
 
     public GeometryCollection() {
-        super("geoJson.GeometryCollection");
+        super("GeometryCollection");
     }
 
     public GeometryCollection(List<GeometryObject<?>> geometries) {
-        super("geoJson.GeometryCollection");
+        super("GeometryCollection");
         this.geometries = geometries;
     }
 
@@ -34,7 +33,7 @@ public class GeometryCollection extends GeoJson {
 
     @Override
     public String toString() {
-        return "geoJson.GeometryCollection{" +
+        return "GeometryCollection{" +
                 "geometries=" + geometries +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

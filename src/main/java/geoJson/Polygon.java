@@ -9,15 +9,15 @@ import geoJson.util.PolygonValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.Polygon")
+@JsonTypeName("Polygon")
 public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     public Polygon() {
-        super("geoJson.Polygon");
+        super("Polygon");
     }
 
     public Polygon(List<List<List<Float>>> coordinates) {
-        super("geoJson.Polygon", coordinates);
+        super("Polygon", coordinates);
         if (!PolygonValidator.isValid(this)) {
             throw new InvalidLinearRingException();
         }
@@ -44,7 +44,7 @@ public class Polygon extends GeometryObject<List<List<List<Float>>>> {
 
     @Override
     public String toString() {
-        return "geoJson.Polygon{" +
+        return "Polygon{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

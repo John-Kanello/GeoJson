@@ -7,15 +7,15 @@ import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.MultiLineString")
+@JsonTypeName("MultiLineString")
 public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
 
     public MultiLineString() {
-        super("geoJson.MultiLineString");
+        super("MultiLineString");
     }
 
     public MultiLineString(List<List<List<Float>>> coordinates) {
-        super("geoJson.MultiLineString", coordinates);
+        super("MultiLineString", coordinates);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MultiLineString extends GeometryObject<List<List<List<Float>>>> {
 
     @Override
     public String toString() {
-        return "geoJson.MultiLineString{" +
+        return "MultiLineString{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +

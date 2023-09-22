@@ -7,11 +7,11 @@ import geoJson.util.BboxValidator;
 
 import java.util.List;
 
-@JsonTypeName("geoJson.LineString")
+@JsonTypeName("LineString")
 public class LineString extends GeometryObject<List<List<Float>>> {
 
     public LineString() {
-        super("geoJson.LineString");
+        super("LineString");
     }
 
     public LineString(String type) {
@@ -19,7 +19,7 @@ public class LineString extends GeometryObject<List<List<Float>>> {
     }
 
     public LineString(List<List<Float>> coordinates) {
-        super("geoJson.LineString", coordinates);
+        super("LineString", coordinates);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LineString extends GeometryObject<List<List<Float>>> {
 
     @Override
     public String toString() {
-        return "geoJson.LineString{" +
+        return "LineString{" +
                 "coordinates=" + coordinates +
                 ", type='" + type + '\'' +
                 ", bbox=" + bbox +
